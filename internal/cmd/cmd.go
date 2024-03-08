@@ -1,13 +1,15 @@
 package cmd
 
 import (
+	"coderblog-interface/internal/consts"
+	"coderblog-interface/internal/controller/user"
 	"context"
+
+	"github.com/gogf/gf/v2/net/goai"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
-
-	"coderblog-interface/internal/controller/hello"
 )
 
 var (
@@ -17,14 +19,34 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			s.Group("/", func(group *ghttp.RouterGroup) {
-				group.Middleware(ghttp.MiddlewareHandlerResponse)
-				group.Bind(
-					hello.NewV1(),
-				)
+			s.Use(ghttp.MiddlewareHandlerResponse)
+			s.BindHandler("GET:/swagger", func(r *ghttp.Request) {
+				r.Response.Write(consts.SwaggerUIPageContent)
 			})
+			s.Group("/", func(group *ghttp.RouterGroup) {
+				group.Middleware(ghttp.MiddlewareCORS)
+				group.Bind(user.NewV1())
+			})
+			enhanceOpenAPIDoc(s)
 			s.Run()
 			return nil
 		},
 	}
 )
+
+func enhanceOpenAPIDoc(s *ghttp.Server) {
+	openapi := s.GetOpenApi()
+	openapi.Config.CommonResponse = ghttp.DefaultHandlerResponse{}
+	openapi.Config.CommonResponseDataField = `Data`
+
+	// API description.
+	openapi.Info = goai.Info{
+		Title:       consts.OpenAPITitle,
+		Description: consts.OpenAPIDescription,
+		Contact: &goai.Contact{
+			Name:  "Lion",
+			URL:   "https://goframe.org",
+			Email: "yanyahonglong@gmail.com",
+		},
+	}
+}

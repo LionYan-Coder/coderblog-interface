@@ -6,3 +6,16 @@ gfcli:
     build: "-a amd64 -s linux -p temp -ew"
     tagPrefixes:
       - my.image.pub/my-app
+
+  gen:
+    dao:
+      - link: "mysql:root:ilovecoding.@tcp(127.0.0.1:3306)/coderblog"
+        jsonCase: "CamelLower"
+
+  run:
+    path: "bin"
+    extra: ""
+    args: "all"
+    watchPaths:
+      - api/*.go
+      - internal/controller/*.go
