@@ -3,6 +3,7 @@ package cmd
 import (
 	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/controller/user"
+	"coderblog-interface/internal/service"
 	"context"
 
 	"github.com/gogf/gf/v2/net/goai"
@@ -24,7 +25,7 @@ var (
 				r.Response.Write(consts.SwaggerUIPageContent)
 			})
 			s.Group("/", func(group *ghttp.RouterGroup) {
-				group.Middleware(ghttp.MiddlewareCORS)
+				group.Middleware(service.Middleware().CORS)
 				group.Bind(user.NewV1())
 			})
 			enhanceOpenAPIDoc(s)

@@ -12,8 +12,8 @@ import (
 
 type (
 	IUser interface {
-		SignUp(ctx context.Context, input v1.SignUpReq) (err error)
-		SignIn(ctx context.Context, input v1.SignInReq) (err error)
+		SignUp(ctx context.Context, input *v1.SignUpReq) (err error)
+		SignIn(ctx context.Context, _ *v1.SignInReq) (res *v1.SignInRes, err error)
 		IsUsernameAvailable(ctx context.Context, username string) (bool, error)
 		IsNicknameAvailable(ctx context.Context, nickname string) (bool, error)
 	}
