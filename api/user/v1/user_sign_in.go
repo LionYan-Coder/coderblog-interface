@@ -1,6 +1,10 @@
 package v1
 
-import "github.com/gogf/gf/v2/frame/g"
+import (
+	"time"
+
+	"github.com/gogf/gf/v2/frame/g"
+)
 
 type SignInReq struct {
 	g.Meta   `path:"/user/sign-in" method:"post" tags:"用户服务" summary:"用户登录"`
@@ -9,4 +13,6 @@ type SignInReq struct {
 }
 
 type SignInRes struct {
+	Token  string    `json:"token"`
+	Expire time.Time `json:"expire"`
 }

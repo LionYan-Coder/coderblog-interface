@@ -5,5 +5,6 @@
 package logic
 
 import (
+	_ "coderblog-interface/internal/logic/role"
 	_ "coderblog-interface/internal/logic/user"
 )

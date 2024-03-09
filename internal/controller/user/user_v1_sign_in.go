@@ -1,14 +1,17 @@
 package user
 
 import (
+	"coderblog-interface/internal/model"
+	"coderblog-interface/internal/service"
 	"context"
 
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
-
-	"coderblog-interface/api/user/v1"
+	v1 "coderblog-interface/api/user/v1"
 )
 
 func (c *ControllerV1) SignIn(ctx context.Context, req *v1.SignInReq) (res *v1.SignInRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	out, err := service.User().SignIn(ctx, model.UserSignInInput{Username: req.Username, Password: req.Password})
+	if err != nil {
+		return nil, err
+	}
+	return &v1.SignInRes{Token: out.Token, Expire: out.Expire}, nil
 }

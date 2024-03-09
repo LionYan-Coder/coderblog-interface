@@ -6,14 +6,14 @@
 package service
 
 import (
-	v1 "coderblog-interface/api/user/v1"
+	"coderblog-interface/internal/model"
 	"context"
 )
 
 type (
 	IUser interface {
-		SignUp(ctx context.Context, input v1.SignUpReq) (err error)
-		SignIn(ctx context.Context, input v1.SignInReq) (err error)
+		SignUp(ctx context.Context, input model.UserSignUpInput) (res *model.UserSignUpOutput, err error)
+		SignIn(ctx context.Context, _ model.UserSignInInput) (res *model.UserSignInOutput, err error)
 		IsUsernameAvailable(ctx context.Context, username string) (bool, error)
 		IsNicknameAvailable(ctx context.Context, nickname string) (bool, error)
 	}

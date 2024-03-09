@@ -5,6 +5,8 @@ import (
 
 	_ "github.com/gogf/gf/contrib/drivers/mysql/v2"
 
+	_ "coderblog-interface/internal/logic"
+
 	"coderblog-interface/internal/cmd"
 
 	"github.com/gogf/gf/v2/os/gctx"
