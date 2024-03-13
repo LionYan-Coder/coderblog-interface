@@ -55,12 +55,12 @@ func (r sRole) GetAll(ctx context.Context, _ model.RoleGetListAllInput) (out *mo
 }
 
 func (r sRole) GetList(ctx context.Context, in model.RoleGetListInput) (out *model.RoleGetListOutput, err error) {
-	m := dao.Role.Ctx(ctx)
+	m := dao.Role.Ctx(ctx).OrderDesc(dao.Role.Columns().UpdateAt)
 	out = &model.RoleGetListOutput{
 		Page: in.Page,
 		Size: in.Size,
 	}
-	listModel := m.Order("create_at desc,update_at desc").Page(in.Page, in.Size)
+	listModel := m.Page(in.Page, in.Size)
 	total, err := listModel.Count()
 	if err != nil || total == 0 {
 		return out, err
