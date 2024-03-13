@@ -1,21 +1,32 @@
+// ================================================================================
+// Code generated and maintained by GoFrame CLI tool. DO NOT EDIT.
+// You can delete these comments if you wish manually maintain this interface file.
+// ================================================================================
+
 package service
 
-import "github.com/gogf/gf/v2/net/ghttp"
+import (
+	"github.com/gogf/gf/v2/net/ghttp"
+)
 
-type MiddlewareService struct{}
+type (
+	IMiddleware interface {
+		CORS(r *ghttp.Request)
+		Auth(r *ghttp.Request)
+	}
+)
 
-var middleware = MiddlewareService{}
+var (
+	localMiddleware IMiddleware
+)
 
-func Middleware() *MiddlewareService {
-	return &middleware
+func Middleware() IMiddleware {
+	if localMiddleware == nil {
+		panic("implement not found for interface IMiddleware, forgot register?")
+	}
+	return localMiddleware
 }
 
-func (s *MiddlewareService) CORS(r *ghttp.Request) {
-	r.Response.CORSDefault()
-	r.Middleware.Next()
-}
-
-func (s *MiddlewareService) Auth(r *ghttp.Request) {
-	Auth().MiddlewareFunc()(r)
-	r.Middleware.Next()
+func RegisterMiddleware(i IMiddleware) {
+	localMiddleware = i
 }

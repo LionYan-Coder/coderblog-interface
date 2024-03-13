@@ -27,7 +27,12 @@ var (
 			})
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(service.Middleware().CORS)
-				group.Bind(user.NewV1(), role.NewV1())
+
+				group.Bind(user.NewV1())
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(service.Middleware().Auth)
+					group.Bind(role.NewV1())
+				})
 
 			})
 			enhanceOpenAPIDoc(s)
@@ -41,7 +46,6 @@ func enhanceOpenAPIDoc(s *ghttp.Server) {
 	openapi := s.GetOpenApi()
 	openapi.Config.CommonResponse = ghttp.DefaultHandlerResponse{}
 	openapi.Config.CommonResponseDataField = `Data`
-
 	// API description.
 	openapi.Info = goai.Info{
 		Title:       consts.OpenAPITitle,

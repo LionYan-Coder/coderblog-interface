@@ -33,8 +33,8 @@ func init() {
 	authService = jwt.New(&jwt.GfJWTMiddleware{
 		Realm:           "coderblog",
 		Key:             []byte(secretKey),
-		Timeout:         time.Minute * 5,
-		MaxRefresh:      time.Minute * 5,
+		Timeout:         time.Minute * 60 * 24,
+		MaxRefresh:      time.Minute * 60 * 24,
 		IdentityKey:     "id",
 		TokenLookup:     "header: Authorization, cookie: jwt",
 		TokenHeadName:   "Bearer",

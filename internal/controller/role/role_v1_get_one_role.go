@@ -1,14 +1,24 @@
 package role
 
 import (
+	"coderblog-interface/internal/model"
+	"coderblog-interface/internal/service"
 	"context"
 
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/util/gconv"
 
-	"coderblog-interface/api/role/v1"
+	v1 "coderblog-interface/api/role/v1"
 )
 
 func (c *ControllerV1) GetOneRole(ctx context.Context, req *v1.GetOneRoleReq) (res *v1.GetOneRoleRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	out, err := service.Role().GetOne(ctx, model.RoleGetOneInput{
+		Id: req.Id,
+	})
+	if err != nil || out == nil {
+		return nil, err
+	}
+	if err = gconv.Scan(out, &res); err != nil {
+		return nil, err
+	}
+	return res, nil
 }

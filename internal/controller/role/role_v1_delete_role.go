@@ -1,14 +1,19 @@
 package role
 
 import (
+	"coderblog-interface/internal/model"
+	"coderblog-interface/internal/service"
 	"context"
 
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
-
-	"coderblog-interface/api/role/v1"
+	v1 "coderblog-interface/api/role/v1"
 )
 
 func (c *ControllerV1) DeleteRole(ctx context.Context, req *v1.DeleteRoleReq) (res *v1.DeleteRoleRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	_, err = service.Role().Delete(ctx, model.RoleDeleteInput{
+		Id: req.Id,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &v1.DeleteRoleRes{}, nil
 }

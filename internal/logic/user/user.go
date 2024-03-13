@@ -8,8 +8,6 @@ import (
 	"coderblog-interface/utility"
 	"context"
 
-	"github.com/gogf/gf/v2/database/gdb"
-
 	"github.com/gogf/gf/v2/errors/gerror"
 )
 
@@ -50,16 +48,7 @@ func (s *sUser) SignUp(ctx context.Context, input model.UserSignUpInput) (res *m
 	if err != nil {
 		return
 	}
-	err1, err2 := dao.User.Transaction(ctx, func(ctx context.Context, _ gdb.TX) error {
-		_, err = dao.User.Ctx(ctx).Data(do.User{Username: input.Username, Nickname: input.Nickname, Password: string(encrypt)}).Insert()
-		return err
-	})
-	if err1 != nil {
-		return &model.UserSignUpOutput{}, err1
-	}
-	if err2 != nil {
-		return &model.UserSignUpOutput{}, err2
-	}
+	_, err = dao.User.Ctx(ctx).Data(do.User{Username: input.Username, Nickname: input.Nickname, Password: string(encrypt)}).Insert()
 	return
 }
 
