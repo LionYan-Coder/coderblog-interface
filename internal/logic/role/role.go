@@ -23,10 +23,52 @@ func (r sRole) Create(ctx context.Context, in model.RoleCreateInput) (out *model
 	if err != nil {
 		return nil, err
 	}
-	return &model.RoleCreateOutput{ID: int(id)}, err
+	return &model.RoleCreateOutput{Id: int(id)}, err
 }
 
-func (r sRole) Update(ctx context.Context, in model.RoleUpdateInput) (err error) {
-	_, err = dao.Role.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Role.Columns().Id, in.ID).Update()
+func (r sRole) Update(ctx context.Context, in model.RoleUpdateInput) (out *model.RoleUpdateOutput, err error) {
+	_, err = dao.Role.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Role.Columns().Id, in.Id).Update()
+	return
+}
+
+func (r sRole) Delete(ctx context.Context, in model.RoleDeleteInput) (out *model.RoleDeleteOutput, err error) {
+	_, err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.Id).Delete()
+	return
+}
+
+func (r sRole) GetOne(ctx context.Context, in model.RoleGetOneInput) (out *model.RoleGetOneOutput, err error) {
+	err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.Id).Scan(&out)
+	return
+}
+
+func (r sRole) GetAll(ctx context.Context, _ model.RoleGetListAllInput) (out *model.RoleGetListAllOutput, err error) {
+	m := dao.Role.Ctx(ctx).OrderDesc(dao.Role.Columns().UpdateAt)
+	out = &model.RoleGetListAllOutput{}
+	out.Total, err = m.Count()
+	if err != nil || out.Total == 0 {
+		return out, err
+	}
+	if err = m.Scan(&out.List); err != nil {
+		return out, err
+	}
+	return
+}
+
+func (r sRole) GetList(ctx context.Context, in model.RoleGetListInput) (out *model.RoleGetListOutput, err error) {
+	m := dao.Role.Ctx(ctx)
+	out = &model.RoleGetListOutput{
+		Page: in.Page,
+		Size: in.Size,
+	}
+	listModel := m.Order("create_at desc,update_at desc").Page(in.Page, in.Size)
+	total, err := listModel.Count()
+	if err != nil || total == 0 {
+		return out, err
+	}
+	out.Total = total
+	out.List = make([]model.RoleGetOneOutput, 0, in.Size)
+	if err = listModel.Scan(&out.List); err != nil {
+		return out, err
+	}
 	return
 }
