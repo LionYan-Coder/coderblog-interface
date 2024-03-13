@@ -40,10 +40,10 @@ type RoleGetListInput struct {
 	Size int
 }
 type RoleGetListOutput struct {
+	List  []RoleGetOneOutput `json:"list" description:"角色列表数据"`
 	Total int                `json:"total" dc:"总数"`
 	Page  int                `json:"page" dc:"分页号码"`
 	Size  int                `json:"size" dc:"分页数量"`
-	List  []RoleGetOneOutput `json:"list" description:"角色列表数据"`
 }
 
 type RoleGetListAllInput struct {
