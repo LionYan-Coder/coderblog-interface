@@ -20,5 +20,5 @@ func (c *ControllerV1) CreateRole(ctx context.Context, req *v1.CreateRoleReq) (r
 	if err != nil {
 		return nil, err
 	}
-	return &v1.CreateRoleRes{Id: out.Id}, nil
+	return &v1.CreateRoleRes{ID: out.ID}, nil
 }

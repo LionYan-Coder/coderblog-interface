@@ -23,21 +23,21 @@ func (r sRole) Create(ctx context.Context, in model.RoleCreateInput) (out *model
 	if err != nil {
 		return nil, err
 	}
-	return &model.RoleCreateOutput{Id: int(id)}, err
+	return &model.RoleCreateOutput{ID: int(id)}, err
 }
 
 func (r sRole) Update(ctx context.Context, in model.RoleUpdateInput) (out *model.RoleUpdateOutput, err error) {
-	_, err = dao.Role.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Role.Columns().Id, in.Id).Update()
+	_, err = dao.Role.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Role.Columns().Id, in.ID).Update()
 	return
 }
 
 func (r sRole) Delete(ctx context.Context, in model.RoleDeleteInput) (out *model.RoleDeleteOutput, err error) {
-	_, err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.Id).Delete()
+	_, err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.ID).Delete()
 	return
 }
 
 func (r sRole) GetOne(ctx context.Context, in model.RoleGetOneInput) (out *model.RoleGetOneOutput, err error) {
-	err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.Id).Scan(&out)
+	err = dao.Role.Ctx(ctx).Where(dao.Role.Columns().Id, in.ID).Scan(&out)
 	return
 }
 

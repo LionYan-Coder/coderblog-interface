@@ -26,5 +26,5 @@ func (c *ControllerV1) CreateArticle(ctx context.Context, req *v1.CreateArticleR
 	if err != nil {
 		return
 	}
-	return &v1.CreateArticleRes{Id: out.Id}, nil
+	return &v1.CreateArticleRes{ID: out.ID}, nil
 }

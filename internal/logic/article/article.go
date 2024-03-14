@@ -23,21 +23,21 @@ func (a sArticle) Create(ctx context.Context, in model.ArticleCreateInput) (out 
 	if err != nil {
 		return nil, err
 	}
-	return &model.ArticleCreateOutput{Id: int(id)}, err
+	return &model.ArticleCreateOutput{ID: int(id)}, err
 }
 
 func (a sArticle) Update(ctx context.Context, in model.ArticleUpdateInput) (out *model.ArticleUpdateOutput, err error) {
-	_, err = dao.Article.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Article.Columns().Id, in.Id).Update()
+	_, err = dao.Article.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Article.Columns().Id, in.ID).Update()
 	return
 }
 
 func (a sArticle) Delete(ctx context.Context, in model.ArticleDeleteInput) (out *model.ArticleDeleteOutput, err error) {
-	_, err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Id, in.Id).Delete()
+	_, err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Id, in.ID).Delete()
 	return
 }
 
 func (a sArticle) GetOne(ctx context.Context, in model.ArticleDetailInput) (out *model.ArticleDetailOutput, err error) {
-	err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Id, in.Id).Scan(&out)
+	err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Id, in.ID).Scan(&out)
 	return
 }
 

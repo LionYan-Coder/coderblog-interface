@@ -9,10 +9,10 @@ type ArticleCreateInput struct {
 	Content string
 }
 type ArticleCreateOutput struct {
-	Id int
+	ID int
 }
 type ArticleUpdateInput struct {
-	Id      int
+	ID      int
 	Title   string
 	Author  string
 	Summary string
@@ -21,13 +21,13 @@ type ArticleUpdateInput struct {
 type ArticleUpdateOutput struct {
 }
 type ArticleDeleteInput struct {
-	Id int
+	ID int
 }
 type ArticleDeleteOutput struct {
 }
 
 type ArticleDetailInput struct {
-	Id int
+	ID int
 }
 type ArticleDetailOutput struct {
 	*entity.Article

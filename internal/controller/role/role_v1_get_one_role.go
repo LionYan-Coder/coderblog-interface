@@ -12,7 +12,7 @@ import (
 
 func (c *ControllerV1) GetOneRole(ctx context.Context, req *v1.GetOneRoleReq) (res *v1.GetOneRoleRes, err error) {
 	out, err := service.Role().GetOne(ctx, model.RoleGetOneInput{
-		Id: req.Id,
+		ID: req.ID,
 	})
 	if err != nil || out == nil {
 		return nil, err

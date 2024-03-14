@@ -14,23 +14,23 @@ type RoleCreateInput struct {
 	RoleBase
 }
 type RoleCreateOutput struct {
-	Id int `json:"id" dc:"id"`
+	ID int `json:"id" dc:"id"`
 }
 
 type RoleUpdateInput struct {
-	Id int `json:"id" dc:"id"`
+	ID int `json:"id" dc:"id"`
 	RoleBase
 }
 type RoleUpdateOutput struct {
 }
 type RoleDeleteInput struct {
-	Id int `json:"id" dc:"id"`
+	ID int `json:"id" dc:"id"`
 }
 type RoleDeleteOutput struct {
 }
 
 type RoleGetOneInput struct {
-	Id int `json:"id" dc:"id"`
+	ID int `json:"id" dc:"id"`
 }
 type RoleGetOneOutput struct {
 	*entity.Role

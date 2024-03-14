@@ -18,7 +18,7 @@ func (c *ControllerV1) UpdateArticle(ctx context.Context, req *v1.UpdateArticleR
 		return
 	}
 	_, err = service.Article().Update(ctx, model.ArticleUpdateInput{
-		Id:      req.Id,
+		ID:      req.ID,
 		Title:   req.Title,
 		Summary: req.Summary,
 		Content: req.Content,

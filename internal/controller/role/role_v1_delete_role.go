@@ -10,7 +10,7 @@ import (
 
 func (c *ControllerV1) DeleteRole(ctx context.Context, req *v1.DeleteRoleReq) (res *v1.DeleteRoleRes, err error) {
 	_, err = service.Role().Delete(ctx, model.RoleDeleteInput{
-		Id: req.Id,
+		ID: req.ID,
 	})
 	if err != nil {
 		return nil, err

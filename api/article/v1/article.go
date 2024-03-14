@@ -19,12 +19,12 @@ type CreateArticleReq struct {
 }
 
 type CreateArticleRes struct {
-	Id int `json:"id" dc:"id"`
+	ID int `json:"id" dc:"id"`
 }
 
 type UpdateArticleReq struct {
 	g.Meta `path:"/article/{id}" method:"put,post" tags:"内容服务" summary:"修改文章"`
-	Id     int `in:"path" v:"min:1#缺少文章ID" json:"id" dc:"id"`
+	ID     int `in:"path" v:"min:1#缺少文章ID" json:"id" dc:"id"`
 	ArticleBase
 }
 
@@ -33,7 +33,7 @@ type UpdateArticleRes struct {
 
 type DeleteArticleReq struct {
 	g.Meta `path:"/article/{id}" method:"delete" tags:"内容服务" summary:"删除文章"`
-	Id     int `in:"path" json:"id" dc:"id"`
+	ID     int `in:"path" json:"id" dc:"id"`
 }
 
 type DeleteArticleRes struct {
@@ -41,7 +41,7 @@ type DeleteArticleRes struct {
 
 type GetOneArticleReq struct {
 	g.Meta `path:"/article/{id}" method:"get" tags:"内容服务" summary:"获取文章"`
-	Id     int `in:"path" json:"id" dc:"id"`
+	ID     int `in:"path" json:"id" dc:"id"`
 }
 
 type GetOneArticleRes struct {

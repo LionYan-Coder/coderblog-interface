@@ -10,7 +10,7 @@ import (
 
 func (c *ControllerV1) DeleteArticle(ctx context.Context, req *v1.DeleteArticleReq) (res *v1.DeleteArticleRes, err error) {
 	_, err = service.Article().Delete(ctx, model.ArticleDeleteInput{
-		Id: req.Id,
+		ID: req.ID,
 	})
 	if err != nil {
 		return
