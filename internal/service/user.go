@@ -16,6 +16,7 @@ type (
 		SignIn(ctx context.Context, _ model.UserSignInInput) (res *model.UserSignInOutput, err error)
 		IsUsernameAvailable(ctx context.Context, username string) (bool, error)
 		IsNicknameAvailable(ctx context.Context, nickname string) (bool, error)
+		GetCtxUser(ctx context.Context) (res *model.ContextUser, err error)
 	}
 )
 

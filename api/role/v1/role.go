@@ -19,7 +19,7 @@ type CreateRoleRes struct {
 }
 
 type UpdateRoleReq struct {
-	g.Meta  `path:"/role/{Id}" method:"put,post" tags:"角色服务" summary:"修改角色"`
+	g.Meta  `path:"/role/{id}" method:"put,post" tags:"角色服务" summary:"修改角色"`
 	Id      int    `in:"path" v:"min:1#缺少角色Id" dc:"角色ID"`
 	Name    string `p:"name" v:"min-length:2|max-length:16#角色名称至少2个字符|角色名称不能超过16个字符"`
 	Type    int    `p:"type" v:"in:0,1#角色类型不合法" dc:"角色类型： 0(管理员) 1（用户）" d:"1"`
@@ -30,7 +30,7 @@ type UpdateRoleRes struct {
 }
 
 type DeleteRoleReq struct {
-	g.Meta `path:"/role/{Id}" method:"delete" tags:"角色服务" summary:"删除角色"`
+	g.Meta `path:"/role/{id}" method:"delete" tags:"角色服务" summary:"删除角色"`
 	Id     int `in:"path" v:"min:1#缺少角色Id" dc:"角色ID"`
 }
 
@@ -38,7 +38,7 @@ type DeleteRoleRes struct {
 }
 
 type GetOneRoleReq struct {
-	g.Meta `path:"/role/{Id}" method:"get" tags:"角色服务" summary:"获取角色"`
+	g.Meta `path:"/role/{id}" method:"get" tags:"角色服务" summary:"获取角色"`
 	Id     int `in:"path" v:"min:1#缺少角色Id" dc:"角色ID"`
 }
 

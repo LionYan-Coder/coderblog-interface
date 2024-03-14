@@ -4,6 +4,13 @@ import (
 	"time"
 )
 
+type ContextUser struct {
+	Id       int    `c:"AuthId"`       // 用户id
+	Username string `json:"username" ` // 用户名
+	Nickname string `json:"nickname" ` // 用户昵称
+	Password string `json:"password" ` // 用户密码
+}
+
 type UserSignInInput struct {
 	Username string
 	Password string

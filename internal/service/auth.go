@@ -1,10 +1,10 @@
 package service
 
 import (
+	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/dao"
 	"coderblog-interface/internal/model"
 	"coderblog-interface/internal/model/do"
-	"coderblog-interface/internal/model/entity"
 	"context"
 	"time"
 
@@ -35,7 +35,7 @@ func init() {
 		Key:             []byte(secretKey),
 		Timeout:         time.Minute * 60 * 24,
 		MaxRefresh:      time.Minute * 60 * 24,
-		IdentityKey:     "id",
+		IdentityKey:     consts.AuthIdentifier,
 		TokenLookup:     "header: Authorization, cookie: jwt",
 		TokenHeadName:   "Bearer",
 		TimeFunc:        time.Now,
@@ -53,7 +53,7 @@ func Authenticator(ctx context.Context) (res interface{}, err error) {
 	if err = r.Parse(&in); err != nil {
 		return
 	}
-	var user *entity.User
+	var user *model.ContextUser
 	err = dao.User.Ctx(ctx).Where(do.User{Username: in.Username}).Scan(&user)
 	if err != nil {
 		return
@@ -67,6 +67,7 @@ func Authenticator(ctx context.Context) (res interface{}, err error) {
 		err = gerror.New(`用户密码错误!`)
 		return
 	}
+
 	return gconv.Map(&user), nil
 }
 
