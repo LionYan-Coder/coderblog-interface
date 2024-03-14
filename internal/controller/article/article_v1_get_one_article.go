@@ -1,14 +1,24 @@
 package article
 
 import (
+	"coderblog-interface/internal/model"
+	"coderblog-interface/internal/service"
 	"context"
 
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/util/gconv"
 
-	"coderblog-interface/api/article/v1"
+	v1 "coderblog-interface/api/article/v1"
 )
 
 func (c *ControllerV1) GetOneArticle(ctx context.Context, req *v1.GetOneArticleReq) (res *v1.GetOneArticleRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	out, err := service.Article().GetOne(ctx, model.ArticleDetailInput{
+		Id: req.Id,
+	})
+	if err != nil {
+		return
+	}
+	if err = gconv.Scan(out, &res); err != nil {
+		return
+	}
+	return
 }

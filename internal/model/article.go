@@ -2,21 +2,21 @@ package model
 
 import "coderblog-interface/internal/model/entity"
 
-type ArticleBase struct {
+type ArticleCreateInput struct {
 	Title   string
+	Author  string
 	Summary string
 	Content string
-}
-
-type ArticleCreateInput struct {
-	ArticleBase
 }
 type ArticleCreateOutput struct {
 	Id int
 }
 type ArticleUpdateInput struct {
-	Id int
-	ArticleBase
+	Id      int
+	Title   string
+	Author  string
+	Summary string
+	Content string
 }
 type ArticleUpdateOutput struct {
 }

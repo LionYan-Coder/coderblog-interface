@@ -1,14 +1,19 @@
 package article
 
 import (
+	"coderblog-interface/internal/model"
+	"coderblog-interface/internal/service"
 	"context"
 
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
-
-	"coderblog-interface/api/article/v1"
+	v1 "coderblog-interface/api/article/v1"
 )
 
 func (c *ControllerV1) DeleteArticle(ctx context.Context, req *v1.DeleteArticleReq) (res *v1.DeleteArticleRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	_, err = service.Article().Delete(ctx, model.ArticleDeleteInput{
+		Id: req.Id,
+	})
+	if err != nil {
+		return
+	}
+	return &v1.DeleteArticleRes{}, nil
 }
