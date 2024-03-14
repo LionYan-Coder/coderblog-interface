@@ -10,8 +10,8 @@ import (
 type BannerBase struct {
 	Title       string `p:"title" v:"required|max-length:30#请填写标题|标题不能超过30个字符" dc:"横幅标题"`
 	Info        string `p:"info" v:"max-length:120#概要不能超过120个字符" dc:"横幅概要"`
-	CoverURL    string `p:"coverUrl" v:"url#地址不合法" dc:"横幅封面地址"`
-	DisplayDate string `p:"displayDate" v:"date#显示日期不合法" dc:"横幅显示日期"`
+	CoverURL    string `p:"coverUrl" v:"required|url#缺少横幅封面地址|地址不合法" dc:"横幅封面地址"`
+	DisplayDate string `p:"displayDate" v:"required|date#缺少横幅显示日期|显示日期不合法" dc:"横幅显示日期"`
 }
 
 type CreateBannerReq struct {
