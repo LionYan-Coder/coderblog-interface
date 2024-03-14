@@ -10,7 +10,7 @@ import (
 type CreateRoleReq struct {
 	g.Meta  `path:"/role" method:"put" tags:"角色服务" summary:"创建角色"`
 	Name    string `p:"name" v:"required|min-length:2|max-length:16#请填写角色名称|角色名称至少2个字符|角色名称不能超过16个字符"`
-	Type    int    `p:"type" v:"in:0,1#角色类型不合法" dc:"角色类型： 0(管理员) 1（用户）" d:"1"`
+	Type    int    `p:"type" v:"in:0,1#角色类型错误" dc:"角色类型： 0(管理员) 1（用户）" d:"1"`
 	Comment string `p:"comment" dc:"角色注释"`
 }
 
