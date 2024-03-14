@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"coderblog-interface/internal/consts"
+	"coderblog-interface/internal/controller/article"
 	"coderblog-interface/internal/controller/role"
 	"coderblog-interface/internal/controller/user"
 	"coderblog-interface/internal/service"
@@ -31,7 +32,7 @@ var (
 				group.Bind(user.NewV1())
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(service.Middleware().Auth)
-					group.Bind(role.NewV1())
+					group.Bind(role.NewV1(), article.NewV1())
 				})
 
 			})
