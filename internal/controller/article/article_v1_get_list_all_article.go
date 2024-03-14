@@ -10,7 +10,7 @@ import (
 	v1 "coderblog-interface/api/article/v1"
 )
 
-func (c *ControllerV1) GetListAllArticle(ctx context.Context, req *v1.GetListAllArticleReq) (res *v1.GetListAllArticleRes, err error) {
+func (c *ControllerV1) GetListAllArticle(ctx context.Context, _ *v1.GetListAllArticleReq) (res *v1.GetListAllArticleRes, err error) {
 	out, err := service.Article().GetAll(ctx, model.ArticleListAllInput{})
 	if err != nil {
 		return
