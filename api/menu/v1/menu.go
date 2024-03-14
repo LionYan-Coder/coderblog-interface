@@ -12,8 +12,8 @@ type MenuBase struct {
 	Type       int    `p:"type" v:"in:1,2,3,4#菜单类型错误" d:"1" dc:"菜单类型:（1: 模块，2: 页面，3: 页面按钮，4: 全局按钮 ）"`
 	Comment    string `p:"comment" v:"max-length:120#注释不能超过120个字符" dc:"菜单注释"`
 	Visibility int    `p:"visibility" v:"in:0,1#可见性类型错误" d:"0" dc:"菜单可见性:（0: 显示，1: 隐藏 ）"`
-	Url        string `p:"url" v:"max-length:30#url不能超过30个字符" dc:"页面路径:（菜单类型为页面时填写）"`
-	ParentId   int    `p:"parentId" dc:"父菜单ID (顶层菜单不传为空)"`
+	URL        string `p:"url" v:"max-length:30#url不能超过30个字符" dc:"页面路径:（菜单类型为页面时填写）"`
+	ParentID   int    `p:"parentId" dc:"父菜单ID (顶层菜单不传为空)"`
 }
 
 type CreateMenuReq struct {

@@ -8,7 +8,7 @@ import (
 )
 
 type CommentBase struct {
-	ReplyId string `p:"replyId" dc:"评论的回复id"`
+	ReplyID string `p:"replyId" dc:"评论的回复id"`
 	Content string `p:"content" v:"required#评论内容不能为空" dc:"评论内容"`
 }
 
