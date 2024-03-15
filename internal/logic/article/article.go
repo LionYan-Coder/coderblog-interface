@@ -1,10 +1,13 @@
 package article
 
 import (
+	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/dao"
 	"coderblog-interface/internal/model"
 	"coderblog-interface/internal/service"
 	"context"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type sArticle struct {
@@ -42,7 +45,12 @@ func (a sArticle) GetOne(ctx context.Context, in model.ArticleDetailInput) (out 
 }
 
 func (a sArticle) GetAll(ctx context.Context, _ model.ArticleListAllInput) (out *model.ArticleListAllOutput, err error) {
-	m := dao.Article.Ctx(ctx).OrderDesc(dao.Article.Columns().UpdateAt)
+	ctxUser := model.ContextUser{}
+	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
+	if err != nil {
+		return
+	}
+	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).OrderDesc(dao.Article.Columns().UpdateAt)
 	out = &model.ArticleListAllOutput{}
 	out.Total, err = m.Count()
 	if err != nil || out.Total == 0 {
@@ -55,7 +63,12 @@ func (a sArticle) GetAll(ctx context.Context, _ model.ArticleListAllInput) (out 
 }
 
 func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error) {
-	m := dao.Article.Ctx(ctx).OrderDesc(dao.Article.Columns().UpdateAt)
+	ctxUser := model.ContextUser{}
+	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
+	if err != nil {
+		return
+	}
+	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).OrderDesc(dao.Article.Columns().UpdateAt)
 	out = &model.ArticleListOutput{
 		Page: in.Page,
 		Size: in.Size,

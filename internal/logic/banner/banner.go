@@ -1,10 +1,13 @@
 package banner
 
 import (
+	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/dao"
 	"coderblog-interface/internal/model"
 	"coderblog-interface/internal/service"
 	"context"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type sBanner struct {
@@ -42,7 +45,8 @@ func (a sBanner) GetOne(ctx context.Context, in model.BannerDetailInput) (out *m
 }
 
 func (a sBanner) GetAll(ctx context.Context, _ model.BannerListAllInput) (out *model.BannerListAllOutput, err error) {
-	m := dao.Banner.Ctx(ctx).OrderDesc(dao.Banner.Columns().UpdateAt)
+	userID := g.RequestFromCtx(ctx).GetParam(consts.AuthIdentifier).Int()
+	m := dao.Banner.Ctx(ctx).Where(dao.Banner.Columns().UserId, userID).OrderDesc(dao.Banner.Columns().UpdateAt)
 	out = &model.BannerListAllOutput{}
 	out.Total, err = m.Count()
 	if err != nil || out.Total == 0 {
@@ -55,7 +59,8 @@ func (a sBanner) GetAll(ctx context.Context, _ model.BannerListAllInput) (out *m
 }
 
 func (a sBanner) GetList(ctx context.Context, in model.BannerListInput) (out *model.BannerListOutput, err error) {
-	m := dao.Banner.Ctx(ctx).OrderDesc(dao.Banner.Columns().UpdateAt)
+	userID := g.RequestFromCtx(ctx).GetParam(consts.AuthIdentifier).Int()
+	m := dao.Banner.Ctx(ctx).Where(dao.Banner.Columns().UserId, userID).OrderDesc(dao.Banner.Columns().UpdateAt)
 	out = &model.BannerListOutput{
 		Page: in.Page,
 		Size: in.Size,

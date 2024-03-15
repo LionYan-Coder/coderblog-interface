@@ -40,7 +40,7 @@ type DeleteArticleRes struct {
 }
 
 type GetOneArticleReq struct {
-	g.Meta `path:"/article/{id}" method:"get" tags:"内容服务" summary:"获取文章"`
+	g.Meta `path:"/article/{id}" method:"get" tags:"内容服务" summary:"根据ID获取文章"`
 	ID     int `in:"path" json:"id" dc:"id"`
 }
 
@@ -49,7 +49,7 @@ type GetOneArticleRes struct {
 }
 
 type GetListArticleReq struct {
-	g.Meta `path:"/article" method:"get" tags:"内容服务" summary:"获取文章"`
+	g.Meta `path:"/article" method:"get" tags:"内容服务" summary:"获取文章列表"`
 	api.CommonPaginationReq
 }
 

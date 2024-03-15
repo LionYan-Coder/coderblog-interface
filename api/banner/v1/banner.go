@@ -15,7 +15,7 @@ type BannerBase struct {
 }
 
 type CreateBannerReq struct {
-	g.Meta `path:"/banner" method:"put" tags:"内容服务" summary:"创建横幅"`
+	g.Meta `path:"/banner" method:"put" tags:"横幅服务" summary:"创建横幅"`
 	BannerBase
 }
 
@@ -24,7 +24,7 @@ type CreateBannerRes struct {
 }
 
 type UpdateBannerReq struct {
-	g.Meta `path:"/banner/{id}" method:"put,post" tags:"内容服务" summary:"修改横幅"`
+	g.Meta `path:"/banner/{id}" method:"put,post" tags:"横幅服务" summary:"修改横幅"`
 	ID     int `in:"path" v:"min:1#缺少横幅ID" json:"id" dc:"id"`
 	BannerBase
 }
@@ -33,7 +33,7 @@ type UpdateBannerRes struct {
 }
 
 type DeleteBannerReq struct {
-	g.Meta `path:"/banner/{id}" method:"delete" tags:"内容服务" summary:"删除横幅"`
+	g.Meta `path:"/banner/{id}" method:"delete" tags:"横幅服务" summary:"删除横幅"`
 	ID     int `in:"path" json:"id" dc:"id"`
 }
 
@@ -41,7 +41,7 @@ type DeleteBannerRes struct {
 }
 
 type GetOneBannerReq struct {
-	g.Meta `path:"/banner/{id}" method:"get" tags:"内容服务" summary:"获取横幅"`
+	g.Meta `path:"/banner/{id}" method:"get" tags:"横幅服务" summary:"根据ID获取横幅"`
 	ID     int `in:"path" json:"id" dc:"id"`
 }
 
@@ -50,7 +50,7 @@ type GetOneBannerRes struct {
 }
 
 type GetListBannerReq struct {
-	g.Meta `path:"/banner" method:"get" tags:"内容服务" summary:"获取横幅"`
+	g.Meta `path:"/banner" method:"get" tags:"横幅服务" summary:"获取横幅列表"`
 	api.CommonPaginationReq
 }
 
@@ -62,7 +62,7 @@ type GetListBannerRes struct {
 }
 
 type GetListAllBannerReq struct {
-	g.Meta `path:"/banner/all" method:"get" tags:"内容服务" summary:"获取所有横幅"`
+	g.Meta `path:"/banner/all" method:"get" tags:"横幅服务" summary:"获取所有横幅"`
 }
 
 type GetListAllBannerRes struct {
