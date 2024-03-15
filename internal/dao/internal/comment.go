@@ -20,22 +20,24 @@ type CommentDao struct {
 
 // CommentColumns defines and stores column names for table comment.
 type CommentColumns struct {
-	Id       string // 评论id
-	ReplyId  string // 回复id
-	UserId   string // 用户id
-	Content  string // 评论内容
-	CreateAt string // 创建时间
-	UpdateAt string // 更新时间
+	Id        string // 评论id
+	UserId    string // 用户id
+	ArticleId string // 评论的文章id
+	ReplyId   string // 回复评论id
+	Content   string // 评论内容
+	CreateAt  string // 创建时间
+	UpdateAt  string // 更新时间
 }
 
 // commentColumns holds the columns for table comment.
 var commentColumns = CommentColumns{
-	Id:       "id",
-	ReplyId:  "reply_id",
-	UserId:   "user_id",
-	Content:  "content",
-	CreateAt: "create_at",
-	UpdateAt: "update_at",
+	Id:        "id",
+	UserId:    "user_id",
+	ArticleId: "article_id",
+	ReplyId:   "reply_id",
+	Content:   "content",
+	CreateAt:  "create_at",
+	UpdateAt:  "update_at",
 }
 
 // NewCommentDao creates and returns a new DAO object for table data access.

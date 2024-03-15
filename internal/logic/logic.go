@@ -7,6 +7,7 @@ package logic
 import (
 	_ "coderblog-interface/internal/logic/article"
 	_ "coderblog-interface/internal/logic/banner"
+	_ "coderblog-interface/internal/logic/comment"
 	_ "coderblog-interface/internal/logic/middleware"
 	_ "coderblog-interface/internal/logic/role"
 	_ "coderblog-interface/internal/logic/user"

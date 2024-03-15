@@ -17,7 +17,7 @@ type MenuBase struct {
 }
 
 type CreateMenuReq struct {
-	g.Meta `path:"/menu" method:"put" tags:"权限服务" summary:"创建菜单"`
+	g.Meta `path:"/menu" method:"put" tags:"菜单服务" summary:"创建菜单"`
 	MenuBase
 }
 
@@ -26,7 +26,7 @@ type CreateMenuRes struct {
 }
 
 type UpdateMenuReq struct {
-	g.Meta `path:"/menu/{id}" method:"put,post" tags:"权限服务" summary:"修改菜单"`
+	g.Meta `path:"/menu/{id}" method:"put,post" tags:"菜单服务" summary:"修改菜单"`
 	ID     int `in:"path" v:"min:1#缺少菜单ID" json:"id" dc:"id"`
 	MenuBase
 }
@@ -35,7 +35,7 @@ type UpdateMenuRes struct {
 }
 
 type DeleteMenuReq struct {
-	g.Meta `path:"/menu/{id}" method:"delete" tags:"权限服务" summary:"删除菜单"`
+	g.Meta `path:"/menu/{id}" method:"delete" tags:"菜单服务" summary:"删除菜单"`
 	ID     int `in:"path" json:"id" dc:"id"`
 }
 
@@ -43,7 +43,7 @@ type DeleteMenuRes struct {
 }
 
 type GetOneMenuReq struct {
-	g.Meta `path:"/menu/{id}" method:"get" tags:"权限服务" summary:"获取菜单"`
+	g.Meta `path:"/menu/{id}" method:"get" tags:"菜单服务" summary:"获取菜单"`
 	ID     int `in:"path" json:"id" dc:"id"`
 }
 
@@ -52,7 +52,7 @@ type GetOneMenuRes struct {
 }
 
 type GetListMenuReq struct {
-	g.Meta `path:"/menu" method:"get" tags:"权限服务" summary:"获取菜单"`
+	g.Meta `path:"/menu" method:"get" tags:"菜单服务" summary:"获取菜单"`
 	api.CommonPaginationReq
 }
 
@@ -64,7 +64,7 @@ type GetListMenuRes struct {
 }
 
 type GetListAllMenuReq struct {
-	g.Meta `path:"/menu/all" method:"get" tags:"权限服务" summary:"获取所有菜单"`
+	g.Meta `path:"/menu/all" method:"get" tags:"菜单服务" summary:"获取所有菜单"`
 }
 
 type GetListAllMenuRes struct {
