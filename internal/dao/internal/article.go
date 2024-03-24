@@ -24,7 +24,9 @@ type ArticleColumns struct {
 	Author   string // 作者
 	Title    string // 文章标题
 	Summary  string // 文章概要
+	CoverUrl string // 文章图片
 	Content  string // 文章内容
+	Tags     string // 文章标签可以多个 “,” 拼接
 	CreateAt string // 创建时间
 	UpdateAt string // 更新时间
 }
@@ -35,7 +37,9 @@ var articleColumns = ArticleColumns{
 	Author:   "author",
 	Title:    "title",
 	Summary:  "summary",
+	CoverUrl: "cover_url",
 	Content:  "content",
+	Tags:     "tags",
 	CreateAt: "create_at",
 	UpdateAt: "update_at",
 }

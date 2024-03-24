@@ -14,7 +14,9 @@ type Article struct {
 	Author   string      `json:"author"   ` // 作者
 	Title    string      `json:"title"    ` // 文章标题
 	Summary  string      `json:"summary"  ` // 文章概要
+	CoverUrl string      `json:"coverUrl" ` // 文章图片
 	Content  string      `json:"content"  ` // 文章内容
+	Tags     string      `json:"tags"     ` // 文章标签可以多个 “,” 拼接
 	CreateAt *gtime.Time `json:"createAt" ` // 创建时间
 	UpdateAt *gtime.Time `json:"updateAt" ` // 更新时间
 }
