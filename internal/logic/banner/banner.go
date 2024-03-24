@@ -7,6 +7,8 @@ import (
 	"coderblog-interface/internal/service"
 	"context"
 
+	"github.com/gogf/gf/v2/os/gtime"
+
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -30,17 +32,17 @@ func (a sBanner) Create(ctx context.Context, in model.BannerCreateInput) (out *m
 }
 
 func (a sBanner) Update(ctx context.Context, in model.BannerUpdateInput) (out *model.BannerUpdateOutput, err error) {
-	_, err = dao.Banner.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Banner.Columns().Id, in.ID).Update()
+	_, err = dao.Banner.Ctx(ctx).Data(in).OmitEmpty().WherePri(in.ID).Update()
 	return
 }
 
 func (a sBanner) Delete(ctx context.Context, in model.BannerDeleteInput) (out *model.BannerDeleteOutput, err error) {
-	_, err = dao.Banner.Ctx(ctx).Where(dao.Banner.Columns().Id, in.ID).Delete()
+	_, err = dao.Banner.Ctx(ctx).WherePri(in.ID).Delete()
 	return
 }
 
 func (a sBanner) GetOne(ctx context.Context, in model.BannerDetailInput) (out *model.BannerDetailOutput, err error) {
-	err = dao.Banner.Ctx(ctx).Where(dao.Banner.Columns().Id, in.ID).Scan(&out)
+	err = dao.Banner.Ctx(ctx).WherePri(in.ID).Scan(&out)
 	return
 }
 
@@ -75,5 +77,11 @@ func (a sBanner) GetList(ctx context.Context, in model.BannerListInput) (out *mo
 	if err = listModel.Scan(&out.List); err != nil {
 		return out, err
 	}
+	return
+}
+
+func (a sBanner) GetOneByCurrentMonth(ctx context.Context, _ model.BannerGetOneByCurrentMonthInput) (out *model.BannerDetailOutput, err error) {
+	currentMonth := gtime.Now()
+	err = dao.Banner.Ctx(ctx).WhereGTE(dao.Banner.Columns().DisplayDate, currentMonth).OrderDesc(dao.Banner.Columns().DisplayDate).Limit(1).Scan(&out)
 	return
 }

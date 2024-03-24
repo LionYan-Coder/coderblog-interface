@@ -18,6 +18,7 @@ type (
 		GetOne(ctx context.Context, in model.ArticleDetailInput) (out *model.ArticleDetailOutput, err error)
 		GetAll(ctx context.Context, _ model.ArticleListAllInput) (out *model.ArticleListAllOutput, err error)
 		GetList(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error)
+		GetRecentByCurrentMonth(ctx context.Context, _ model.ArticleGetRecentByCurrentMonthInput) (out *model.ArticleListAllOutput, err error)
 	}
 )
 

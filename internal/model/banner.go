@@ -57,3 +57,6 @@ type BannerListAllOutput struct {
 	Total int
 	List  []BannerDetailOutput
 }
+
+type BannerGetOneByCurrentMonthInput struct {
+}

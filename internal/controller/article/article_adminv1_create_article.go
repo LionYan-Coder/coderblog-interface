@@ -8,17 +8,16 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 
-	v1 "coderblog-interface/api/article/v1"
+	adminV1 "coderblog-interface/api/article/adminV1"
 )
 
-func (c *ControllerV1) UpdateArticle(ctx context.Context, req *v1.UpdateArticleReq) (res *v1.UpdateArticleRes, err error) {
+func (c *ControllerAdminV1) CreateArticle(ctx context.Context, req *adminV1.CreateArticleReq) (res *adminV1.CreateArticleRes, err error) {
 	ctxUser := model.ContextUser{}
 	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
 	if err != nil {
 		return
 	}
-	_, err = service.Article().Update(ctx, model.ArticleUpdateInput{
-		ID:      req.ID,
+	out, err := service.Article().Create(ctx, model.ArticleCreateInput{
 		Title:   req.Title,
 		Summary: req.Summary,
 		Content: req.Content,
@@ -27,5 +26,5 @@ func (c *ControllerV1) UpdateArticle(ctx context.Context, req *v1.UpdateArticleR
 	if err != nil {
 		return
 	}
-	return &v1.UpdateArticleRes{}, err
+	return &adminV1.CreateArticleRes{ID: out.ID}, nil
 }

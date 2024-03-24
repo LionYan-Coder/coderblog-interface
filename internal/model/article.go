@@ -49,3 +49,6 @@ type ArticleListAllOutput struct {
 	Total int
 	List  []ArticleDetailOutput
 }
+
+type ArticleGetRecentByCurrentMonthInput struct {
+}

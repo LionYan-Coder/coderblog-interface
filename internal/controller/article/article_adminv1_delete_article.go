@@ -5,15 +5,15 @@ import (
 	"coderblog-interface/internal/service"
 	"context"
 
-	v1 "coderblog-interface/api/article/v1"
+	adminV1 "coderblog-interface/api/article/adminV1"
 )
 
-func (c *ControllerV1) DeleteArticle(ctx context.Context, req *v1.DeleteArticleReq) (res *v1.DeleteArticleRes, err error) {
+func (c *ControllerAdminV1) DeleteArticle(ctx context.Context, req *adminV1.DeleteArticleReq) (res *adminV1.DeleteArticleRes, err error) {
 	_, err = service.Article().Delete(ctx, model.ArticleDeleteInput{
 		ID: req.ID,
 	})
 	if err != nil {
 		return
 	}
-	return &v1.DeleteArticleRes{}, nil
+	return &adminV1.DeleteArticleRes{}, nil
 }

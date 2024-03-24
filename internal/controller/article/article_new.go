@@ -13,3 +13,9 @@ type ControllerV1 struct{}
 func NewV1() article.IArticleV1 {
 	return &ControllerV1{}
 }
+
+type ControllerAdminV1 struct{}
+
+func NewAdminV1() article.IArticleAdminV1 {
+	return &ControllerAdminV1{}
+}

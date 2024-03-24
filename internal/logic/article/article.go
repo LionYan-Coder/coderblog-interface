@@ -7,6 +7,8 @@ import (
 	"coderblog-interface/internal/service"
 	"context"
 
+	"github.com/gogf/gf/v2/os/gtime"
+
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -81,6 +83,20 @@ func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *
 	out.Total = total
 	out.List = make([]model.ArticleDetailOutput, 0, in.Size)
 	if err = listModel.Scan(&out.List); err != nil {
+		return out, err
+	}
+	return
+}
+
+func (a sArticle) GetRecentByCurrentMonth(ctx context.Context, _ model.ArticleGetRecentByCurrentMonthInput) (out *model.ArticleListAllOutput, err error) {
+	curMonth := gtime.Now()
+	m := dao.Article.Ctx(ctx).WhereLTE(dao.Article.Columns().CreateAt, curMonth).OrderDesc(dao.Article.Columns().UpdateAt).Limit(5)
+	out = &model.ArticleListAllOutput{}
+	out.Total, err = m.Count()
+	if err != nil || out.Total == 0 {
+		return out, err
+	}
+	if err = m.Scan(&out.List); err != nil {
 		return out, err
 	}
 	return

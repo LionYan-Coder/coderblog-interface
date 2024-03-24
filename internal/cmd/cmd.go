@@ -22,7 +22,7 @@ var (
 		Name:  "main",
 		Usage: "main",
 		Brief: "start http server",
-		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
+		Func: func(_ context.Context, _ *gcmd.Parser) (err error) {
 			s := g.Server()
 			s.Use(ghttp.MiddlewareHandlerResponse)
 			s.BindHandler("GET:/swagger", func(r *ghttp.Request) {
@@ -33,8 +33,11 @@ var (
 
 				group.Bind(user.NewV1())
 				group.Group("/", func(group *ghttp.RouterGroup) {
-					group.Middleware(service.Middleware().Auth)
-					group.Bind(role.NewV1(), article.NewV1(), banner.NewV1(), comment.NewV1())
+					group.Bind(banner.NewV1(), article.NewV1())
+					group.Group("/admin", func(group *ghttp.RouterGroup) {
+						group.Middleware(service.Middleware().Auth)
+						group.Bind(role.NewV1(), article.NewAdminV1(), banner.NewAdminV1(), comment.NewV1())
+					})
 				})
 
 			})

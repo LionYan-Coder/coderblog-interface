@@ -18,6 +18,7 @@ type (
 		GetOne(ctx context.Context, in model.BannerDetailInput) (out *model.BannerDetailOutput, err error)
 		GetAll(ctx context.Context, _ model.BannerListAllInput) (out *model.BannerListAllOutput, err error)
 		GetList(ctx context.Context, in model.BannerListInput) (out *model.BannerListOutput, err error)
+		GetOneByCurrentMonth(ctx context.Context, _ model.BannerGetOneByCurrentMonthInput) (out *model.BannerDetailOutput, err error)
 	}
 )
 

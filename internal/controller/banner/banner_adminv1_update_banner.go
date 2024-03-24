@@ -9,20 +9,20 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
 
-	v1 "coderblog-interface/api/banner/v1"
+	adminv1 "coderblog-interface/api/banner/adminV1"
 )
 
-func (c *ControllerV1) CreateBanner(ctx context.Context, req *v1.CreateBannerReq) (res *v1.CreateBannerRes, err error) {
+func (c *ControllerAdminV1) UpdateBanner(ctx context.Context, req *adminv1.UpdateBannerReq) (res *adminv1.UpdateBannerRes, err error) {
 	userID := g.RequestFromCtx(ctx).GetParam(consts.AuthIdentifier).Int()
-	input := model.BannerCreateInput{
+	input := model.BannerUpdateInput{
 		UserID: userID,
 	}
 	if err = gconv.Scan(req, &input); err != nil {
 		return
 	}
-	out, err := service.Banner().Create(ctx, input)
+	_, err = service.Banner().Update(ctx, input)
 	if err != nil {
 		return
 	}
-	return &v1.CreateBannerRes{ID: out.ID}, nil
+	return &adminv1.UpdateBannerRes{}, nil
 }

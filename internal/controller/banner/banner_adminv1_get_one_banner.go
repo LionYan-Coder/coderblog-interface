@@ -7,10 +7,10 @@ import (
 
 	"github.com/gogf/gf/v2/util/gconv"
 
-	v1 "coderblog-interface/api/banner/v1"
+	adminv1 "coderblog-interface/api/banner/adminV1"
 )
 
-func (c *ControllerV1) GetOneBanner(ctx context.Context, req *v1.GetOneBannerReq) (res *v1.GetOneBannerRes, err error) {
+func (c *ControllerAdminV1) GetOneBanner(ctx context.Context, req *adminv1.GetOneBannerReq) (res *adminv1.GetOneBannerRes, err error) {
 	out, err := service.Banner().GetOne(ctx, model.BannerDetailInput{ID: req.ID})
 	if err != nil || out == nil {
 		return

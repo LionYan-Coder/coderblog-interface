@@ -7,10 +7,10 @@ import (
 
 	"github.com/gogf/gf/v2/util/gconv"
 
-	v1 "coderblog-interface/api/article/v1"
+	adminV1 "coderblog-interface/api/article/adminV1"
 )
 
-func (c *ControllerV1) GetOneArticle(ctx context.Context, req *v1.GetOneArticleReq) (res *v1.GetOneArticleRes, err error) {
+func (c *ControllerAdminV1) GetOneArticle(ctx context.Context, req *adminV1.GetOneArticleReq) (res *adminV1.GetOneArticleRes, err error) {
 	out, err := service.Article().GetOne(ctx, model.ArticleDetailInput{
 		ID: req.ID,
 	})
