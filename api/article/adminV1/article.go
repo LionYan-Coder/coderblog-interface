@@ -2,15 +2,18 @@ package adminV1
 
 import (
 	"coderblog-interface/api"
-	"coderblog-interface/internal/model/entity"
+
+	"github.com/gogf/gf/v2/os/gtime"
 
 	"github.com/gogf/gf/v2/frame/g"
 )
 
 type ArticleBase struct {
-	Title   string `p:"title" v:"required|max-length:30#请填写标题|标题不能超过30个字符" dc:"文章标题"`
-	Summary string `p:"summary" v:"max-length:120#概要不能超过120个字符" dc:"文章概要"`
-	Content string `p:"content" dc:"文章内容"`
+	Title    string   `p:"title" v:"required|max-length:30#请填写标题|标题不能超过30个字符" dc:"文章标题"`
+	Summary  string   `p:"summary" v:"max-length:120#概要不能超过120个字符" dc:"文章概要"`
+	Content  string   `p:"content" dc:"文章内容"`
+	Tags     []string `p:"tags" dc:"文章标签"`
+	CoverURL string   `p:"coverUrl" json:"coverUrl" v:"required|url#缺少文章封面|地址不合法" dc:"文章封面地址"`
 }
 
 type CreateArticleReq struct {
@@ -45,7 +48,16 @@ type GetOneArticleReq struct {
 }
 
 type GetOneArticleRes struct {
-	*entity.Article
+	Id       int         `json:"id"       ` // 文章ID
+	Author   string      `json:"author"   ` // 作者
+	Title    string      `json:"title"    ` // 文章标题
+	Summary  string      `json:"summary"  ` // 文章概要
+	CoverUrl string      `json:"coverUrl" ` // 文章图片
+	Content  string      `json:"content"  ` // 文章内容
+	Tags     []string    `json:"tags"`      // 文章标签
+	CreateAt *gtime.Time `json:"createAt" ` // 创建时间
+	UpdateAt *gtime.Time `json:"updateAt" ` // 更新时间
+
 }
 
 type GetListArticleReq struct {

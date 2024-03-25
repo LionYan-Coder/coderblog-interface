@@ -3,20 +3,24 @@ package model
 import "coderblog-interface/internal/model/entity"
 
 type ArticleCreateInput struct {
-	Title   string
-	Author  string
-	Summary string
-	Content string
+	Title    string
+	Author   string
+	Summary  string
+	Content  string
+	CoverURL string
+	Tags     []string
 }
 type ArticleCreateOutput struct {
 	ID int
 }
 type ArticleUpdateInput struct {
-	ID      int
-	Title   string
-	Author  string
-	Summary string
-	Content string
+	ID       int
+	Title    string
+	Author   string
+	Summary  string
+	Content  string
+	CoverURL string
+	Tags     []string
 }
 type ArticleUpdateOutput struct {
 }

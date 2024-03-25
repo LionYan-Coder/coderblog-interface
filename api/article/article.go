@@ -22,4 +22,5 @@ type IArticleAdminV1 interface {
 
 type IArticleV1 interface {
 	GetRecentArticleByCurrentMonth(ctx context.Context, req *v1.GetRecentArticleByCurrentMonthReq) (res *v1.GetRecentArticleByCurrentMonthRes, err error)
+	GetListArticle(ctx context.Context, req *v1.GetListArticleReq) (res *v1.GetListArticleRes, err error)
 }

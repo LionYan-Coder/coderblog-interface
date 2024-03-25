@@ -18,7 +18,7 @@ type Article struct {
 	Summary  interface{} // 文章概要
 	CoverUrl interface{} // 文章图片
 	Content  interface{} // 文章内容
-	Tags     interface{} // 文章标签可以多个 “,” 拼接
+	Tags     interface{} // 文章标签
 	CreateAt *gtime.Time // 创建时间
 	UpdateAt *gtime.Time // 更新时间
 }

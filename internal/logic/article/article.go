@@ -32,7 +32,7 @@ func (a sArticle) Create(ctx context.Context, in model.ArticleCreateInput) (out 
 }
 
 func (a sArticle) Update(ctx context.Context, in model.ArticleUpdateInput) (out *model.ArticleUpdateOutput, err error) {
-	_, err = dao.Article.Ctx(ctx).Data(in).OmitEmpty().Where(dao.Article.Columns().Id, in.ID).Update()
+	_, err = dao.Article.Ctx(ctx).Data(in).OmitNil().Where(dao.Article.Columns().Id, in.ID).Update()
 	return
 }
 
@@ -46,13 +46,13 @@ func (a sArticle) GetOne(ctx context.Context, in model.ArticleDetailInput) (out 
 	return
 }
 
-func (a sArticle) GetAll(ctx context.Context, _ model.ArticleListAllInput) (out *model.ArticleListAllOutput, err error) {
+func (a sArticle) GetAllByUser(ctx context.Context, _ model.ArticleListAllInput) (out *model.ArticleListAllOutput, err error) {
 	ctxUser := model.ContextUser{}
 	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
 	if err != nil {
 		return
 	}
-	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).OrderDesc(dao.Article.Columns().UpdateAt)
+	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt)
 	out = &model.ArticleListAllOutput{}
 	out.Total, err = m.Count()
 	if err != nil || out.Total == 0 {
@@ -64,13 +64,32 @@ func (a sArticle) GetAll(ctx context.Context, _ model.ArticleListAllInput) (out 
 	return
 }
 
-func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error) {
+func (a sArticle) GetListByUser(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error) {
 	ctxUser := model.ContextUser{}
 	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
 	if err != nil {
 		return
 	}
-	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).OrderDesc(dao.Article.Columns().UpdateAt)
+	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt)
+	out = &model.ArticleListOutput{
+		Page: in.Page,
+		Size: in.Size,
+	}
+	listModel := m.Page(in.Page, in.Size)
+	total, err := listModel.Count()
+	if err != nil || total == 0 {
+		return out, err
+	}
+	out.Total = total
+	out.List = make([]model.ArticleDetailOutput, 0, in.Size)
+	if err = listModel.Scan(&out.List); err != nil {
+		return out, err
+	}
+	return
+}
+
+func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error) {
+	m := dao.Article.Ctx(ctx).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt)
 	out = &model.ArticleListOutput{
 		Page: in.Page,
 		Size: in.Size,
@@ -90,7 +109,7 @@ func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *
 
 func (a sArticle) GetRecentByCurrentMonth(ctx context.Context, _ model.ArticleGetRecentByCurrentMonthInput) (out *model.ArticleListAllOutput, err error) {
 	curMonth := gtime.Now()
-	m := dao.Article.Ctx(ctx).WhereLTE(dao.Article.Columns().CreateAt, curMonth).OrderDesc(dao.Article.Columns().UpdateAt).Limit(5)
+	m := dao.Article.Ctx(ctx).WhereLTE(dao.Article.Columns().CreateAt, curMonth).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt).Limit(4)
 	out = &model.ArticleListAllOutput{}
 	out.Total, err = m.Count()
 	if err != nil || out.Total == 0 {

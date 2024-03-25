@@ -8,7 +8,7 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 
-	adminV1 "coderblog-interface/api/article/adminV1"
+	"coderblog-interface/api/article/adminV1"
 )
 
 func (c *ControllerAdminV1) UpdateArticle(ctx context.Context, req *adminV1.UpdateArticleReq) (res *adminV1.UpdateArticleRes, err error) {
@@ -18,11 +18,13 @@ func (c *ControllerAdminV1) UpdateArticle(ctx context.Context, req *adminV1.Upda
 		return
 	}
 	_, err = service.Article().Update(ctx, model.ArticleUpdateInput{
-		ID:      req.ID,
-		Title:   req.Title,
-		Summary: req.Summary,
-		Content: req.Content,
-		Author:  ctxUser.Nickname,
+		ID:       req.ID,
+		Title:    req.Title,
+		Summary:  req.Summary,
+		Content:  req.Content,
+		CoverURL: req.CoverURL,
+		Tags:     req.Tags,
+		Author:   ctxUser.Nickname,
 	})
 	if err != nil {
 		return

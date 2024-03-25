@@ -26,7 +26,7 @@ type ArticleColumns struct {
 	Summary  string // 文章概要
 	CoverUrl string // 文章图片
 	Content  string // 文章内容
-	Tags     string // 文章标签可以多个 “,” 拼接
+	Tags     string // 文章标签
 	CreateAt string // 创建时间
 	UpdateAt string // 更新时间
 }

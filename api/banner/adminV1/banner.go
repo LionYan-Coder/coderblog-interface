@@ -11,7 +11,7 @@ type CreateBannerReq struct {
 	g.Meta      `path:"/banner" method:"put" tags:"横幅服务" summary:"创建横幅"`
 	Title       string `p:"title" json:"title" v:"required|max-length:30#请填写标题|标题不能超过30个字符" dc:"横幅标题"`
 	Info        string `p:"info" json:"info" v:"max-length:120#概要不能超过120个字符" dc:"横幅概要"`
-	CoverURL    string `p:"coverUrl" json:"coverURL" v:"required|url#缺少横幅封面地址|地址不合法" dc:"横幅封面地址"`
+	CoverURL    string `p:"coverUrl" json:"coverUrl" v:"required|url#缺少横幅封面地址|地址不合法" dc:"横幅封面地址"`
 	DisplayDate string `p:"displayDate" json:"displayDate" v:"required|date#缺少横幅显示日期|显示日期不合法" dc:"横幅显示日期"`
 }
 

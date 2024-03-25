@@ -1,8 +1,8 @@
 package article
 
 import (
+	"coderblog-interface/api/article/adminV1"
 	"coderblog-interface/internal/model"
-	"coderblog-interface/internal/model/entity"
 	"coderblog-interface/internal/service"
 	"context"
 
@@ -11,12 +11,12 @@ import (
 	v1 "coderblog-interface/api/article/v1"
 )
 
-func (c *ControllerV1) GetRecentArticleByCurrentMonth(ctx context.Context, req *v1.GetRecentArticleByCurrentMonthReq) (res *v1.GetRecentArticleByCurrentMonthRes, err error) {
+func (c *ControllerV1) GetRecentArticleByCurrentMonth(ctx context.Context, _ *v1.GetRecentArticleByCurrentMonthReq) (res *v1.GetRecentArticleByCurrentMonthRes, err error) {
 	out, err := service.Article().GetRecentByCurrentMonth(ctx, model.ArticleGetRecentByCurrentMonthInput{})
 	if err != nil {
 		return
 	}
-	var list []*entity.Article
+	var list []*adminV1.GetOneArticleRes
 	if err = gconv.Scan(out.List, &list); err != nil {
 		return nil, err
 	}
