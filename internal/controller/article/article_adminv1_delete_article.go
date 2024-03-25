@@ -5,7 +5,7 @@ import (
 	"coderblog-interface/internal/service"
 	"context"
 
-	adminV1 "coderblog-interface/api/article/adminV1"
+	"coderblog-interface/api/article/adminV1"
 )
 
 func (c *ControllerAdminV1) DeleteArticle(ctx context.Context, req *adminV1.DeleteArticleReq) (res *adminV1.DeleteArticleRes, err error) {

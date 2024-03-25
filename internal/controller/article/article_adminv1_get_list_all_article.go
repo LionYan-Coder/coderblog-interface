@@ -7,11 +7,11 @@ import (
 
 	"github.com/gogf/gf/v2/util/gconv"
 
-	adminV1 "coderblog-interface/api/article/adminV1"
+	"coderblog-interface/api/article/adminV1"
 )
 
 func (c *ControllerAdminV1) GetListAllArticle(ctx context.Context, _ *adminV1.GetListAllArticleReq) (res *adminV1.GetListAllArticleRes, err error) {
-	out, err := service.Article().GetAll(ctx, model.ArticleListAllInput{})
+	out, err := service.Article().GetAllByUser(ctx, model.ArticleListAllInput{})
 	if err != nil {
 		return
 	}
