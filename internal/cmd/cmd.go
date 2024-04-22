@@ -6,9 +6,13 @@ import (
 	"coderblog-interface/internal/controller/banner"
 	"coderblog-interface/internal/controller/comment"
 	"coderblog-interface/internal/controller/role"
+	"coderblog-interface/internal/controller/upload"
 	"coderblog-interface/internal/controller/user"
 	"coderblog-interface/internal/service"
 	"context"
+
+	"github.com/clerk/clerk-sdk-go/v2"
+	"github.com/gogf/gf/v2/os/genv"
 
 	"github.com/gogf/gf/v2/net/goai"
 
@@ -35,18 +39,26 @@ var (
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Bind(banner.NewV1(), article.NewV1())
 					group.Group("/admin", func(group *ghttp.RouterGroup) {
-						group.Middleware(service.Middleware().Auth)
-						group.Bind(role.NewV1(), article.NewAdminV1(), banner.NewAdminV1(), comment.NewV1())
+
+						group.Middleware(service.Middleware().ClerkAuth)
+						group.Bind(role.NewV1(), article.NewAdminV1(), banner.NewAdminV1(), comment.NewV1(), upload.NewAdminV1())
 					})
 				})
 
 			})
+			configClerk(s)
 			enhanceOpenAPIDoc(s)
+			s.SetFileServerEnabled(true)
 			s.Run()
 			return nil
 		},
 	}
 )
+
+func configClerk(_ *ghttp.Server) {
+	env := genv.Map()
+	clerk.SetKey(env["clerk_secret_key"])
+}
 
 func enhanceOpenAPIDoc(s *ghttp.Server) {
 	openapi := s.GetOpenApi()

@@ -10,5 +10,6 @@ import (
 	_ "coderblog-interface/internal/logic/comment"
 	_ "coderblog-interface/internal/logic/middleware"
 	_ "coderblog-interface/internal/logic/role"
+	_ "coderblog-interface/internal/logic/upload"
 	_ "coderblog-interface/internal/logic/user"
 )

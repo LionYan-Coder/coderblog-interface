@@ -20,28 +20,32 @@ type ArticleDao struct {
 
 // ArticleColumns defines and stores column names for table article.
 type ArticleColumns struct {
-	Id       string // 文章ID
-	Author   string // 作者
-	Title    string // 文章标题
-	Summary  string // 文章概要
-	CoverUrl string // 文章图片
-	Content  string // 文章内容
-	Tags     string // 文章标签
-	CreateAt string // 创建时间
-	UpdateAt string // 更新时间
+	Id        string // 文章ID
+	Author    string // 作者
+	AuthorId  string // 作者id
+	Title     string // 文章标题
+	Summary   string // 文章概要
+	CoverUrl  string // 文章图片
+	Content   string // 文章内容
+	Tags      string // 文章标签
+	CreateAt  string // 创建时间
+	UpdateAt  string // 更新时间
+	Published string // 发布状态（1: 已发布，0: 未发布）
 }
 
 // articleColumns holds the columns for table article.
 var articleColumns = ArticleColumns{
-	Id:       "id",
-	Author:   "author",
-	Title:    "title",
-	Summary:  "summary",
-	CoverUrl: "cover_url",
-	Content:  "content",
-	Tags:     "tags",
-	CreateAt: "create_at",
-	UpdateAt: "update_at",
+	Id:        "id",
+	Author:    "author",
+	AuthorId:  "author_id",
+	Title:     "title",
+	Summary:   "summary",
+	CoverUrl:  "cover_url",
+	Content:   "content",
+	Tags:      "tags",
+	CreateAt:  "create_at",
+	UpdateAt:  "update_at",
+	Published: "published",
 }
 
 // NewArticleDao creates and returns a new DAO object for table data access.

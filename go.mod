@@ -6,14 +6,16 @@ require (
 	github.com/gogf/gf-jwt/v2 v2.1.0
 	github.com/gogf/gf/contrib/drivers/mysql/v2 v2.6.4
 	github.com/gogf/gf/v2 v2.6.4
-	golang.org/x/crypto v0.21.0
+	golang.org/x/crypto v0.22.0
 )
 
 require (
 	github.com/BurntSushi/toml v1.2.0 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
+	github.com/clerk/clerk-sdk-go/v2 v2.0.3 // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
@@ -30,7 +32,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.14.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
 	golang.org/x/net v0.21.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

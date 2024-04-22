@@ -9,7 +9,7 @@ import (
 )
 
 type ArticleBase struct {
-	Title    string   `p:"title" v:"required|max-length:30#请填写标题|标题不能超过30个字符" dc:"文章标题"`
+	Title    string   `p:"title" v:"required|min-length:5|max-length:30#请填写标题|标题不能小于5个字符|标题不能超过30个字符" dc:"文章标题"`
 	Summary  string   `p:"summary" v:"max-length:120#概要不能超过120个字符" dc:"文章概要"`
 	Content  string   `p:"content" dc:"文章内容"`
 	Tags     []string `p:"tags" dc:"文章标签"`
@@ -48,16 +48,16 @@ type GetOneArticleReq struct {
 }
 
 type GetOneArticleRes struct {
-	Id       int         `json:"id"       ` // 文章ID
-	Author   string      `json:"author"   ` // 作者
-	Title    string      `json:"title"    ` // 文章标题
-	Summary  string      `json:"summary"  ` // 文章概要
-	CoverUrl string      `json:"coverUrl" ` // 文章图片
-	Content  string      `json:"content"  ` // 文章内容
-	Tags     []string    `json:"tags"`      // 文章标签
-	CreateAt *gtime.Time `json:"createAt" ` // 创建时间
-	UpdateAt *gtime.Time `json:"updateAt" ` // 更新时间
-
+	ID        int         `json:"id"        ` // 文章ID
+	Author    string      `json:"author"    ` // 作者
+	Title     string      `json:"title"     ` // 文章标题
+	Summary   string      `json:"summary"   ` // 文章概要
+	CoverURL  string      `json:"coverUrl"  ` // 文章图片
+	Content   string      `json:"content"   ` // 文章内容
+	Tags      []string    `json:"tags"      ` // 文章标签
+	CreateAt  *gtime.Time `json:"createAt"  ` // 创建时间
+	UpdateAt  *gtime.Time `json:"updateAt"  ` // 更新时间
+	Published bool        `json:"published" ` // 发布状态（1: 已发布，0: 未发布）
 }
 
 type GetListArticleReq struct {

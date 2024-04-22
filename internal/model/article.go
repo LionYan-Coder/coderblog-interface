@@ -1,10 +1,13 @@
 package model
 
-import "coderblog-interface/internal/model/entity"
+import (
+	"github.com/gogf/gf/v2/os/gtime"
+)
 
 type ArticleCreateInput struct {
 	Title    string
 	Author   string
+	AuthorID string
 	Summary  string
 	Content  string
 	CoverURL string
@@ -17,6 +20,7 @@ type ArticleUpdateInput struct {
 	ID       int
 	Title    string
 	Author   string
+	AuthorID int
 	Summary  string
 	Content  string
 	CoverURL string
@@ -34,7 +38,16 @@ type ArticleDetailInput struct {
 	ID int
 }
 type ArticleDetailOutput struct {
-	*entity.Article
+	ID        int         `json:"id"        ` // 文章ID
+	Author    string      `json:"author"    ` // 作者
+	Title     string      `json:"title"     ` // 文章标题
+	Summary   string      `json:"summary"   ` // 文章概要
+	CoverURL  string      `json:"coverUrl"  ` // 文章图片
+	Content   string      `json:"content"   ` // 文章内容
+	Tags      []string    `json:"tags"      ` // 文章标签
+	CreateAt  *gtime.Time `json:"createAt"  ` // 创建时间
+	UpdateAt  *gtime.Time `json:"updateAt"  ` // 更新时间
+	Published bool        `json:"published" ` // 发布状态（1: 已发布，0: 未发布）
 }
 type ArticleListInput struct {
 	Page int

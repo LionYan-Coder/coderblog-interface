@@ -5,6 +5,7 @@ import (
 	"coderblog-interface/internal/dao"
 	"coderblog-interface/internal/model"
 	"coderblog-interface/internal/service"
+	"coderblog-interface/utility"
 	"context"
 
 	"github.com/gogf/gf/v2/os/gtime"
@@ -65,12 +66,11 @@ func (a sArticle) GetAllByUser(ctx context.Context, _ model.ArticleListAllInput)
 }
 
 func (a sArticle) GetListByUser(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error) {
-	ctxUser := model.ContextUser{}
-	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
+	nickname, err := utility.GetUserNicknameByHeader(ctx)
 	if err != nil {
 		return
 	}
-	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, ctxUser.Nickname).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt)
+	m := dao.Article.Ctx(ctx).Where(dao.Article.Columns().Author, nickname).FieldsEx(dao.Article.Columns().Content).OrderDesc(dao.Article.Columns().UpdateAt)
 	out = &model.ArticleListOutput{
 		Page: in.Page,
 		Size: in.Size,

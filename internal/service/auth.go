@@ -29,7 +29,7 @@ func Auth() *jwt.GfJWTMiddleware {
 
 func init() {
 	env := genv.Map()
-	secretKey := env["secretKey"]
+	secretKey := env["secret_key"]
 	authService = jwt.New(&jwt.GfJWTMiddleware{
 		Realm:           "coderblog",
 		Key:             []byte(secretKey),
