@@ -12,7 +12,7 @@ import (
 
 type (
 	IUpload interface {
-		UploadImage(_ context.Context, input model.UploadFileInput) (out *model.UploadFileOutput, err error)
+		UploadImage(ctx context.Context, input model.UploadFileInput) (out *model.UploadFileOutput, err error)
 	}
 )
 

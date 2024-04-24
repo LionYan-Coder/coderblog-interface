@@ -1,19 +1,16 @@
 package article
 
 import (
-	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/model"
 	"coderblog-interface/internal/service"
+	"coderblog-interface/utility"
 	"context"
-
-	"github.com/gogf/gf/v2/frame/g"
 
 	"coderblog-interface/api/article/adminV1"
 )
 
 func (c *ControllerAdminV1) UpdateArticle(ctx context.Context, req *adminV1.UpdateArticleReq) (res *adminV1.UpdateArticleRes, err error) {
-	ctxUser := model.ContextUser{}
-	err = g.RequestFromCtx(ctx).GetParam(consts.JWT_PAYLOAD).Scan(&ctxUser)
+	user, err := utility.GetUserByHeader(ctx)
 	if err != nil {
 		return
 	}
@@ -24,7 +21,8 @@ func (c *ControllerAdminV1) UpdateArticle(ctx context.Context, req *adminV1.Upda
 		Content:  req.Content,
 		CoverURL: req.CoverURL,
 		Tags:     req.Tags,
-		Author:   ctxUser.Nickname,
+		Author:   *user.FirstName + *user.LastName,
+		AuthorID: user.ID,
 	})
 	if err != nil {
 		return

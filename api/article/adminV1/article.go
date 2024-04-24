@@ -80,3 +80,19 @@ type GetListAllArticleRes struct {
 	List  []GetOneArticleRes `json:"list" dc:"文章列表"`
 	Total int                `json:"total" dc:"文章总数"`
 }
+
+type PublishArticleReq struct {
+	g.Meta `path:"/article/publish/{id}" method:"put,post" tags:"内容服务" summary:"发布文章"`
+	ID     int `in:"path" json:"id" dc:"id"`
+}
+
+type PublishArticleRes struct {
+}
+
+type UnPublishArticleReq struct {
+	g.Meta `path:"/article/unpublish/{id}" method:"put,post" tags:"内容服务" summary:"撤销发布文章"`
+	ID     int `in:"path" json:"id" dc:"id"`
+}
+
+type UnPublishArticleRes struct {
+}

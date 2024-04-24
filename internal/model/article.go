@@ -20,7 +20,7 @@ type ArticleUpdateInput struct {
 	ID       int
 	Title    string
 	Author   string
-	AuthorID int
+	AuthorID string
 	Summary  string
 	Content  string
 	CoverURL string
@@ -59,6 +59,18 @@ type ArticleListOutput struct {
 	Page  int `json:"page" dc:"分页号码"`
 	Size  int `json:"size" dc:"分页数量"`
 }
+
+type ArticlePublishInput struct {
+	ID int
+}
+
+type ArticlePublishOutput struct{}
+
+type ArticleUnPublishInput struct {
+	ID int
+}
+
+type ArticleUnPublishOutput struct{}
 
 type ArticleListAllInput struct {
 }

@@ -24,6 +24,24 @@ func New() service.IArticle {
 	return &sArticle{}
 }
 
+func (a sArticle) Publish(ctx context.Context, in model.ArticlePublishInput) (out *model.ArticlePublishOutput, err error) {
+	user, err := utility.GetUserByHeader(ctx)
+	if err != nil {
+		return
+	}
+	_, err = dao.Article.Ctx(ctx).Data(dao.Article.Columns().Published, consts.Publish).WherePri(in.ID).Where(dao.Article.Columns().AuthorId, user.ID).Update()
+	return
+}
+
+func (a sArticle) UnPublish(ctx context.Context, in model.ArticleUnPublishInput) (out *model.ArticleUnPublishOutput, err error) {
+	user, err := utility.GetUserByHeader(ctx)
+	if err != nil {
+		return
+	}
+	_, err = dao.Article.Ctx(ctx).Data(dao.Article.Columns().Published, consts.UnPublish).WherePri(in.ID).Where(dao.Article.Columns().AuthorId, user.ID).Update()
+	return
+}
+
 func (a sArticle) Create(ctx context.Context, in model.ArticleCreateInput) (out *model.ArticleCreateOutput, err error) {
 	id, err := dao.Article.Ctx(ctx).Data(in).InsertAndGetId()
 	if err != nil {

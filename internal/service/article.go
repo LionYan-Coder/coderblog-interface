@@ -12,6 +12,8 @@ import (
 
 type (
 	IArticle interface {
+		Publish(ctx context.Context, in model.ArticlePublishInput) (out *model.ArticlePublishOutput, err error)
+		UnPublish(ctx context.Context, in model.ArticleUnPublishInput) (out *model.ArticleUnPublishOutput, err error)
 		Create(ctx context.Context, in model.ArticleCreateInput) (out *model.ArticleCreateOutput, err error)
 		Update(ctx context.Context, in model.ArticleUpdateInput) (out *model.ArticleUpdateOutput, err error)
 		Delete(ctx context.Context, in model.ArticleDeleteInput) (out *model.ArticleDeleteOutput, err error)
