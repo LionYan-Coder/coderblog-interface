@@ -21,8 +21,7 @@ func (c *ControllerAdminV1) UpdateArticle(ctx context.Context, req *adminV1.Upda
 		Content:  req.Content,
 		CoverURL: req.CoverURL,
 		Tags:     req.Tags,
-		Author:   *user.FirstName + *user.LastName,
-		AuthorID: user.ID,
+		UserID:   user.ID,
 	})
 	if err != nil {
 		return

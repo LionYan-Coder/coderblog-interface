@@ -20,6 +20,15 @@ func GetUserByHeader(ctx context.Context) (ctxUser *clerk.User, err error) {
 	return
 }
 
+func GetUserFullName(ctx context.Context, userID string) (fullName string, err error) {
+	ctxUser, err := user.Get(ctx, userID)
+	if err != nil {
+		return
+	}
+	fullName = *ctxUser.FirstName + *ctxUser.LastName
+	return
+}
+
 func GetUserNicknameByHeader(ctx context.Context) (nickname string, err error) {
 	ctxUser, err := user.Get(ctx, g.RequestFromCtx(ctx).Header.Get(UserKey))
 	if err != nil {

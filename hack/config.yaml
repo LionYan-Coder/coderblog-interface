@@ -9,7 +9,7 @@ gfcli:
 
   gen:
     dao:
-      - link: "mysql:root:ilovecoding.@tcp(127.0.0.1:3306)/coderblog"
+      - link: "mysql:root:ilovecoding.@tcp(127.0.0.1:3306)/lionblog_development"
         jsonCase: "CamelLower"
 
   run:
@@ -19,3 +19,11 @@ gfcli:
     watchPaths:
       - api/*.go
       - internal/controller/*.go
+
+  build:
+    name: "lionblog"
+    dumpEnv: true
+    cgo: false
+    path: "./bin"
+    arch: "amd64"
+    system: "linux"

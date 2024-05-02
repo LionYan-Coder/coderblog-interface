@@ -13,7 +13,7 @@ import (
 type Comment struct {
 	g.Meta    `orm:"table:comment, do:true"`
 	Id        interface{} // 评论id
-	UserId    interface{} // 用户id
+	AuthorId  interface{} // 用户id
 	ArticleId interface{} // 评论的文章id
 	ReplyId   interface{} // 回复评论id
 	Content   interface{} // 评论内容

@@ -3,11 +3,8 @@ package cmd
 import (
 	"coderblog-interface/internal/consts"
 	"coderblog-interface/internal/controller/article"
-	"coderblog-interface/internal/controller/banner"
-	"coderblog-interface/internal/controller/comment"
-	"coderblog-interface/internal/controller/role"
+	"coderblog-interface/internal/controller/notebook"
 	"coderblog-interface/internal/controller/upload"
-	"coderblog-interface/internal/controller/user"
 	"coderblog-interface/internal/service"
 	"context"
 
@@ -34,14 +31,12 @@ var (
 			})
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(service.Middleware().CORS)
-
-				group.Bind(user.NewV1())
 				group.Group("/", func(group *ghttp.RouterGroup) {
-					group.Bind(banner.NewV1(), article.NewV1())
+					group.Bind(article.NewV1(), notebook.NewV1())
 					group.Group("/admin", func(group *ghttp.RouterGroup) {
 
 						group.Middleware(service.Middleware().ClerkAuth)
-						group.Bind(role.NewV1(), article.NewAdminV1(), banner.NewAdminV1(), comment.NewV1(), upload.NewAdminV1())
+						group.Bind(article.NewAdminV1(), notebook.NewAdminV1(), upload.NewAdminV1())
 					})
 				})
 

@@ -17,12 +17,11 @@ type IArticleAdminV1 interface {
 	DeleteArticle(ctx context.Context, req *adminV1.DeleteArticleReq) (res *adminV1.DeleteArticleRes, err error)
 	GetOneArticle(ctx context.Context, req *adminV1.GetOneArticleReq) (res *adminV1.GetOneArticleRes, err error)
 	GetListArticle(ctx context.Context, req *adminV1.GetListArticleReq) (res *adminV1.GetListArticleRes, err error)
-	GetListAllArticle(ctx context.Context, req *adminV1.GetListAllArticleReq) (res *adminV1.GetListAllArticleRes, err error)
 	PublishArticle(ctx context.Context, req *adminV1.PublishArticleReq) (res *adminV1.PublishArticleRes, err error)
 	UnPublishArticle(ctx context.Context, req *adminV1.UnPublishArticleReq) (res *adminV1.UnPublishArticleRes, err error)
 }
 
 type IArticleV1 interface {
-	GetRecentArticleByCurrentMonth(ctx context.Context, req *v1.GetRecentArticleByCurrentMonthReq) (res *v1.GetRecentArticleByCurrentMonthRes, err error)
 	GetListArticle(ctx context.Context, req *v1.GetListArticleReq) (res *v1.GetListArticleRes, err error)
+	GetOneArticle(ctx context.Context, req *v1.GetOneArticleReq) (res *v1.GetOneArticleRes, err error)
 }

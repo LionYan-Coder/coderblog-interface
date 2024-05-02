@@ -20,8 +20,7 @@ func (c *ControllerAdminV1) CreateArticle(ctx context.Context, req *adminV1.Crea
 		Content:  req.Content,
 		CoverURL: req.CoverURL,
 		Tags:     req.Tags,
-		Author:   *user.FirstName + *user.LastName,
-		AuthorID: user.ID,
+		UserID:   user.ID,
 	})
 	if err != nil {
 		return

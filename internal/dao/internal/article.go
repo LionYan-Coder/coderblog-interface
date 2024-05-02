@@ -21,8 +21,7 @@ type ArticleDao struct {
 // ArticleColumns defines and stores column names for table article.
 type ArticleColumns struct {
 	Id        string // 文章ID
-	Author    string // 作者
-	AuthorId  string // 作者id
+	UserId    string // 用户id
 	Title     string // 文章标题
 	Summary   string // 文章概要
 	CoverUrl  string // 文章图片
@@ -36,8 +35,7 @@ type ArticleColumns struct {
 // articleColumns holds the columns for table article.
 var articleColumns = ArticleColumns{
 	Id:        "id",
-	Author:    "author",
-	AuthorId:  "author_id",
+	UserId:    "user_id",
 	Title:     "title",
 	Summary:   "summary",
 	CoverUrl:  "cover_url",

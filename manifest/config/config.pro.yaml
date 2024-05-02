@@ -1,0 +1,22 @@
+server:
+  address:     ":8080"
+  openapiPath: "/api.json"
+  serverRoot: "/resource"
+
+logger:
+  path:  "./log/lionblog_pro"
+  level : "all"
+  stdout: true
+
+database:
+  logger:
+    path:  "./log/lionblog_pro/sql"
+    level: "all"
+    stdout: true
+
+  default:
+    link: "mysql:root:ilovecoding.@tcp(mysql:3306)/lionblog_production?loc=Local&parseTime=true"
+    debug: true
+
+
+

@@ -18,10 +18,8 @@ type (
 		Update(ctx context.Context, in model.ArticleUpdateInput) (out *model.ArticleUpdateOutput, err error)
 		Delete(ctx context.Context, in model.ArticleDeleteInput) (out *model.ArticleDeleteOutput, err error)
 		GetOne(ctx context.Context, in model.ArticleDetailInput) (out *model.ArticleDetailOutput, err error)
-		GetAllByUser(ctx context.Context, _ model.ArticleListAllInput) (out *model.ArticleListAllOutput, err error)
-		GetListByUser(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error)
+		GetListByPublish(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error)
 		GetList(ctx context.Context, in model.ArticleListInput) (out *model.ArticleListOutput, err error)
-		GetRecentByCurrentMonth(ctx context.Context, _ model.ArticleGetRecentByCurrentMonthInput) (out *model.ArticleListAllOutput, err error)
 	}
 )
 
