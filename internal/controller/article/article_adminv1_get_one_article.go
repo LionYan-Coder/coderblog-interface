@@ -12,7 +12,7 @@ import (
 )
 
 func (c *ControllerAdminV1) GetOneArticle(ctx context.Context, req *adminV1.GetOneArticleReq) (res *adminV1.GetOneArticleRes, err error) {
-	out, err := service.Article().GetOne(ctx, model.ArticleDetailInput{
+	out, err := service.Article().GetOneById(ctx, model.ArticleDetailByIDInput{
 		ID: req.ID,
 	})
 	if err != nil || out == nil {
