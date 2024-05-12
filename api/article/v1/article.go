@@ -33,8 +33,8 @@ type GetListArticleRes struct {
 }
 
 type GetOneArticleReq struct {
-	g.Meta `path:"/article/{id}" method:"get" tags:"前端-博客服务" summary:"根据id获取文章"`
-	ID     int `in:"path" json:"id" dc:"id"`
+	g.Meta `path:"/article/{title}" method:"get" tags:"前端-博客服务" summary:"根据标题获取文章"`
+	Title  string `in:"path" json:"title" dc:"title"`
 }
 
 type GetOneArticleRes struct {

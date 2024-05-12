@@ -56,8 +56,13 @@ func (a sArticle) Delete(ctx context.Context, in model.ArticleDeleteInput) (out 
 	return
 }
 
-func (a sArticle) GetOne(ctx context.Context, in model.ArticleDetailInput) (out *model.ArticleDetailOutput, err error) {
+func (a sArticle) GetOneById(ctx context.Context, in model.ArticleDetailByIDInput) (out *model.ArticleDetailByIDOutput, err error) {
 	err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Id, in.ID).Scan(&out)
+	return
+}
+
+func (a sArticle) GetOneByTitle(ctx context.Context, in model.ArticleDetailByTitleInput) (out *model.ArticleDetailByTitleOutput, err error) {
+	err = dao.Article.Ctx(ctx).Where(dao.Article.Columns().Title, in.Title).Scan(&out)
 	return
 }
 
@@ -73,7 +78,7 @@ func (a sArticle) GetList(ctx context.Context, in model.ArticleListInput) (out *
 		return out, err
 	}
 	out.Total = total
-	out.List = make([]model.ArticleDetailOutput, 0, in.Size)
+	out.List = make([]model.ArticleDetailByIDOutput, 0, in.Size)
 	if err = listModel.Scan(&out.List); err != nil {
 		return out, err
 	}
@@ -92,7 +97,7 @@ func (a sArticle) GetListByPublish(ctx context.Context, in model.ArticleListInpu
 		return out, err
 	}
 	out.Total = total
-	out.List = make([]model.ArticleDetailOutput, 0, in.Size)
+	out.List = make([]model.ArticleDetailByIDOutput, 0, in.Size)
 	if err = listModel.Scan(&out.List); err != nil {
 		return out, err
 	}

@@ -32,21 +32,32 @@ type ArticleDeleteInput struct {
 type ArticleDeleteOutput struct {
 }
 
-type ArticleDetailInput struct {
+type ArticleDetailByIDInput struct {
 	ID int
 }
-type ArticleDetailOutput struct {
+type ArticleDetailByIDOutput struct {
 	ArticleUpdateInput
 	CreateAt  *gtime.Time `json:"createAt"  ` // 创建时间
 	UpdateAt  *gtime.Time `json:"updateAt"  ` // 更新时间
 	Published bool        `json:"published" ` // 发布状态（1: 已发布，0: 未发布）
 }
+
+type ArticleDetailByTitleInput struct {
+	Title string
+}
+
+type ArticleDetailByTitleOutput struct {
+	ArticleUpdateInput
+	CreateAt *gtime.Time `json:"createAt"  ` // 创建时间
+	UpdateAt *gtime.Time `json:"updateAt"  ` // 更新时间
+}
+
 type ArticleListInput struct {
 	Page int
 	Size int
 }
 type ArticleListOutput struct {
-	List  []ArticleDetailOutput
+	List  []ArticleDetailByIDOutput
 	Total int `json:"total" dc:"总数"`
 	Page  int `json:"page" dc:"分页号码"`
 	Size  int `json:"size" dc:"分页数量"`
