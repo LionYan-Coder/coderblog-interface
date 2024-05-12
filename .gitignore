@@ -8,6 +8,8 @@
 .vscode/
 bin/
 log/
+mysql-data/
+docker-componse.yml
 **/.DS_Store
 gf
 main
